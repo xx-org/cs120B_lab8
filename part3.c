@@ -7,8 +7,6 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <io.h>
-#include <io.c>
 #include <string.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
@@ -19,7 +17,7 @@ void ADC_init(){
 	
 }
 
-const unsigned short Max = 0x001F;
+unsigned short Max = 0x0001;
 int main(void) {
 	DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
 	DDRB = 0xFF; PORTB = 0x00;
@@ -30,7 +28,9 @@ int main(void) {
 	while(1) {
 		//continue;
 		x = ADC;
-		if(x > Max){PORTB = 1;}else{PORTB = 0;}
+		if(x > Max)
+		  Max = x;
+		if(x > Max/2){PORTB = 1;}else{PORTB = 0;}
 		//PORTB = (char)x;
 		//PORTD = (char)(x >> 8);
 

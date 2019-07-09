@@ -7,8 +7,6 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <io.h>
-#include <io.c>
 #include <string.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
@@ -27,7 +25,6 @@ int main(void) {
 	DDRD = 0xFF; PORTD = 0x00;
 	unsigned short x = ADC;
 	ADC_init();
-	unsigned char tmp = 0x00;
 	while(1) {
 		//continue;
 		x = ADC;
